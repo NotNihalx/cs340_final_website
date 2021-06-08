@@ -3,13 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit-cover"/>
-    <title>Teams</title>
+    <title>Leagues</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="../css/styles.css" rel="stylesheet"/>
-    <link href="teams.css" rel="stylesheet"/>
+    
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
     <script src="../js/jquery-3.3.1.min.js"></script>
 </head>
 <body id="primary-background">
+    <!-- create a menu to access other pages on the site -->
     <nav class="container-lg">
     <div class="nav-container">
         <ul>
@@ -37,68 +47,120 @@
         <h1>Teams involved in the professional League Scene</h1>
         <p>In this section, users can find information containing the history of various teams that have competed to date. This information provides various statistics such as the name of the team, the year the team was established/disbanded, whether that team is currently playing, and what league they belong to.
         </p>
-        <p>To aid in the users search, users can apply a filter to help better query results to their liking.
-        </p>
 
-        <table style="width:100%">
-            <tbody><tr>
-              <th>teamID</th>
-              <th>name</th>
-              <th>yearEstablished</th>
-              <th>yearEnded</th>
-              <th>currentlyPlaying</th>
-              <th>leagueFK</th>
-            </tr>
-            <tr>
-                <th>01</th>
-                <th>Fnatic</th>
-                <th>2011</th>
-                <th></th>
-                <th>TRUE</th>
-                <th>2</th>
-            </tr>
-            <tr>
-                <th>02</th>
-                <th>T1</th>
-                <th>2013</th>
-                <th></th>
-                <th>TRUE</th>
-                <th>1</th>
-            </tr>
-          </tbody></table>
-        <br>
-        <h1>Add/Update/Remove Entries</h1>
-        <form>
-        <label for="teamName">Enter Team Name:</label>
-        <input type="text" id="teamName" name="teamName"><br><br>
-        <label for="yearEstablished">Enter Year Established:</label>
-        <input type="text" id="yearEstablished" name="yearEstablished"><br><br>
-        <label for="yearEnded">Enter Year Ended:</label>
-        <input type="text" id="yearEnded" name="yearEnded" placeholder="Optional"><br><br>
-        Currently Playing?
-        <label for="yes">Yes</label>
-        <input type="radio" id="yes" name="currentlyPlaying" value="yes">
-        <label for="no">No</label>
-        <input type="radio" id="no" name="currentlyPlaying" value="no"><br><br>
-        <input type="submit" value="Insert">
-        <input type="submit" value="Update">
-        <input type="submit" value="Delete">
-        </form>
-        <br>
-        <h1>Enter Search Criteria</h1>
-        <form action="http://web.engr.oregonstate.edu/~zhangluy/tools/class-content/form_tests/check_request.php" method="post">
-        <label for="champ">Enter Team name:</label>
-        <input type="text" id="champ" name="champ"><br><br>
-        <label for="elo">Enter Currently Playing:</label>
-        <input type="text" id="elo" name="elo"><br><br>
-        <label for="lenmin">Year Established by:</label>
-        <input type="text" id="lenmin" name="lenmin"><br><br>
-        <label for="lenmax">Enter Year Ended by:</label>
-        <input type="text" id="lenmax" name="lenmax"><br><br>
-        <label for="lenmax">Enter Which League (Refer to League page for ID's):</label>
-        <input type="text" id="lenmax" name="lenmax"><br><br>
-        <input type="submit" value="Submit">
-</form>
+        <h3>Notes for usage:</h3>
+        <p>Users can directly add, edit, or delete entries using the provided buttons. Upon adding an entry, user must update values accordingly.</p>
+        <p>teamID, yearEstablished, and yearEnded (can be null) is of type INT. leagueFK corresponds to the league that team belongs to </p>
+        
+        <div class ="search-button" style= "margin-top: 30px; margin-bottom: 30px;">
+            <input type="text" id="myInput" onkeyup="teamSearch()" placeholder="Search via team name">
+            </div>
+            <!-- create our table, add some basic css styling, and populate it with some entries-->
+            <div class="table-content" style="margin-top: 50px;">
+              <table class="table table-borded table-responsive " id="table-list">
+                  <thead class="table-dark">
+                      <tr>
+                          <th>teamID</th>
+                          <th>name</th>
+                          <th>yearEstablished</th>
+                          <th>yearEnded</th>
+                          <th>currentlyPlaying</th>
+                          <th>leagueFk</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        <td>1</td>
+                          <td>DamWon Kia</td>
+                          <td>2017</td>
+                          <td></td>
+                          <td>TRUE</td>
+                          <td>1</td>
+                      </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Fnatic</td>
+                            <td>2011</td>
+                            <td></td>
+                            <td>TRUE</td>
+                            <td>4</td>
+                      </tr>
+                      <tr>
+                        <td>3</td>
+                          <td>Royal Never Give Up</td>
+                          <td>2015</td>
+                          <td></td>
+                          <td>TRUE</td>
+                          <td>2</td>
+                      </tr>
+                      <tr>
+                        <td>4</td>
+                          <td>Cloud 9</td>
+                          <td>2013</td>
+                          <td></td>
+                          <td>TRUE</td>
+                          <td>3</td>
+                      </tr>
+                      <tr>
+                        <td>5</td>
+                          <td>PSG Talon</td>
+                          <td>2020</td>
+                          <td></td>
+                          <td>TRUE</td>
+                          <td>5</td>
+                      </tr>
+                      <tr>
+                        <td>6</td>
+                          <td>G2 Esports</td>
+                          <td>2016</td>
+                          <td></td>
+                          <td>TRUE</td>
+                          <td>4</td>
+                      </tr>
+                  </tbody>
+              </table>
+              <button class="btn btn-info" id="add"><span class="glyphicon glyphicon-plus-sign"></span>Add New Entry</button>
+          </div>    
+          
+          <br>
+      
+      <script src="bootstable.js"></script>
+      <script>
+      
+      // allows for dynamic modification of our created table
+
+      $("#table-list").SetEditable();
+      $('#add').click(function() {
+          rowAddNew('table-list', [1,2,3]);
+      });
+
+      // function to let users search for a particular team
+    
+      function teamSearch() {
+    
+      // Declare variables
+    
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("table-list");
+      tr = table.getElementsByTagName("tr");
+    
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+      
+      </script>
 
     </section>
 

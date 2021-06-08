@@ -3,12 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit-cover"/>
-    <title>Tournaments</title>
+    <title>Leagues</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="../css/styles.css" rel="stylesheet"/>
-    <link href="tournaments.css" rel="stylesheet"/>
+    
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
     <script src="../js/jquery-3.3.1.min.js"></script>
 </head>
+
+<!-- Creates a Menu bar to navigate to other pages on site -->
+
 <body id="primary-background">
     <nav class="container-lg">
     <div class="nav-container">
@@ -38,75 +50,133 @@
           Information included is as follows: Year the tournament took place, the location of the tournament, the name of the tournament, the format of the tournament,
           the teams involved, the winner, the reward/prize money, the number of participants, and the leagues involved.
         </p>
-        <p>To aid in the users search, users can apply a filter to help better query results to their liking.
-        </p>
+        
+        <h3>Notes for usage:</h3>
+        <p>Users can directly add, edit, or delete entries using the provided buttons. Upon adding an entry, user must update values accordingly.</p>
+    
+        <div class ="search-button" style= "margin-top: 30px; margin-bottom: 30px;">
+            <input type="text" id="myInput" onkeyup="tournamentSearch()" placeholder="Search via tournament name">
+            <input type="text" id="myInput" onkeyup="winnerSearch()" placeholder="Search via winner (team name)">
+            </div>
+            
+            <!-- Create a table, style it with some basic css, and populate with some entries -->
+            <div class="table-content" style="margin-top: 50px;">
+              <table class="table table-borded table-responsive " id="table-list">
+                  <thead class="table-dark">
+                      <tr>
+                          <th>tournamentID</th>
+                          <th>tournamentName</th>
+                          <th>year</th>
+                          <th>location</th>
+                          <th>participant</th>
+                          <th>winner</th>
+                          <th>reward</th>
+                          <th>numberParticipant</th>
+                          <th>leaguesParticipating</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        <td>1</td>
+                          <td>LEC Spring 2021</td>
+                          <td>2021</td>
+                          <td>Europe</td>
+                          <td>2</td>
+                          <td>Mad Lions</td>
+                          <td>97332</td>
+                          <td>10</td>
+                          <td>4</td>
+                      </tr>
+                        <tr>
+                        <td>2</td>
+                        <td>LCK Spring 2021</td>
+                          <td>2021</td>
+                          <td>Korea</td>
+                          <td>1</td>
+                          <td>DamWon Kia</td>
+                          <td>180070</td>
+                          <td>10</td>
+                          <td>1</td>
+                      </tr>
+                      <tr>
+                          <td>3</td>
+                        <td>LPL Spring 2021</td>
+                          <td>2021</td>
+                          <td>China</td>
+                          <td>3</td>
+                          <td>Royal Never Give Up</td>
+                          <td>312735</td>
+                          <td>17</td>
+                          <td>2</td>
+                      </tr>
+                  </tbody>
+              </table>
+              <button class="btn btn-info" id="add"><span class="glyphicon glyphicon-plus-sign"></span>Add New Entry</button>
+          </div>    
+          
+          <br>
+      
+      <script src="bootstable.js"></script>
+      <script>
+      
+      // dynamically modify our created table with the help of called script.
 
-        <table style="width:100%">
-            <tbody><tr>
-              <th>tournamentID</th>
-              <th>year</th>
-              <th>location</th>
-              <th>tournamentName</th>
-              <th>format</th>
-              <th>participant</th>
-              <th>winner</th>
-              <th>reward</th>
-              <th>numberParticipant</th>
-              <th>leaguesParticpating</th>
-            </tr>
-            <tr>
-              <th>01</th>
-              <th>2020</th>
-              <th>Shanghai, CN</th>
-              <th>World's 2020</th>
-              <th>Single Elimination</th>
-              <th></th>
-              <th>Damwon Gaming</th>
-              <th>556250</th>
-              <th>22</th>
-              <th>10</th>
-            </tr>
-          </tbody></table>
-        <br>
-        <h1>Add/Update/Remove Entries</h1>
-        <form>
-        <label for="year">Enter Tournament Year:</label>
-        <input type="text" id="year" name="year"><br><br>
-        <label for="location">Enter Tournament Location:</label>
-        <input type="text" id="location" name="location"><br><br>
-        <label for="name">Enter Tournament Name:</label>
-        <input type="text" id="name" name="name"><br><br>
-        <label for="format">Enter Tournament Format:</label>
-        <input type="text" id="format" name="format"><br><br>
-        <label for="winner">Enter Tournament Winner:</label>
-        <input type="text" id="winner" name="winner"><br><br>
-        <label for="reward">Enter Tournament Reward:</label>
-        <input type="text" id="reward" name="reward"><br><br>
-        <input type="submit" value="Insert">
-        <input type="submit" value="Update">
-        <input type="submit" value="Delete">
-      </form>
-      <br>
+      $("#table-list").SetEditable();
+      $('#add').click(function() {
+          rowAddNew('table-list', [1,2,3]);
+      });
+    
+      // function to allow users to search by torunament name
+      function tournamentSearch() {
+    
+      // Declare variables
+    
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("table-list");
+      tr = table.getElementsByTagName("tr");
+    
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
 
-
-        <h1>Enter Search Criteria</h1>
-        <form action="http://web.engr.oregonstate.edu/~zhangluy/tools/class-content/form_tests/check_request.php" method="post">
-        <label for="champ">Enter Tournament name:</label>
-        <input type="text" id="champ" name="champ"><br><br>
-        <label for="elo">Enter year:</label>
-        <input type="text" id="elo" name="elo"><br><br>
-        <label for="lenmin">Year Location:</label>
-        <input type="text" id="lenmin" name="lenmin"><br><br>
-        <label for="lenmax">Enter Winner:</label>
-        <input type="text" id="lenmax" name="lenmax"><br><br>
-        <label for="lenmax">Enter format:</label>
-        <input type="text" id="lenmax" name="lenmax"><br><br>
-        <label for="lenmax">Enter reward:</label>
-        <input type="text" id="lenmax" name="lenmax"><br><br>
-        <label for="lenmax">Enter Participating Leagues (Refer to League section for ID's):</label>
-        <input type="text" id="lenmax" name="lenmax"><br><br>
-        <input type="submit" value="Submit">
-</form>
+    // function to allow users to search by winner of tournament
+    function winnerSearch() {
+    
+    // Declare variables
+  
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("table-list");
+    tr = table.getElementsByTagName("tr");
+  
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[5];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+      
+      </script>
 
     </section>
 

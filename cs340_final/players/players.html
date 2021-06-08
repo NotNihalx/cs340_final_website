@@ -3,15 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit-cover"/>
-    <title>Players</title>
+    <title>Leagues</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="../css/styles.css" rel="stylesheet"/>
-    <link href="players.css" rel="stylesheet"/>
+    
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
     <script src="../js/jquery-3.3.1.min.js"></script>
 </head>
 <body id="primary-background">
     <nav class="container-lg">
     <div class="nav-container">
+      <!-- create a menu to access other pages on the site -->
         <ul>
             <li>
                 <a href="../leagues/leagues.html">Leagues</a>
@@ -37,63 +47,115 @@
         <p>In this section, users can find information containing the history of various players that have competed to date. This information provides various statistics such as
           the username of the player, the players first and last name, what team they are playing for (if any), and what was their previous team (if any)
         </p>
-        <p>To aid in the users search, users can apply a filter to help better query results to their liking.
-        </p>
+        
+        <h3>Notes for usage:</h3>
+        <p>Users can directly add, edit, or delete entries using the provided buttons. Upon adding an entry, user must update values accordingly.</p>
+        <p>playerID is of type INT. currentTeam and previousTeam of are type INT and the corresponding value can be determined via the Teams page.</p>
+       
+        <div class ="search-button" style= "margin-top: 30px; margin-bottom: 30px;">
+        <input type="text" id="myInput" onkeyup="playerSearch()" placeholder="Search via player userName..">
+        </div>
+        
+        <!-- create our table, add some basic css styling, and populate it with some entries-->
+        
+        <div class="table-content" style="margin-top: 50px;">
+          <table class="table table-borded table-responsive " id="table-list">
+              <thead class="table-dark">
+                  <tr>
+                      <th>playerID</th>
+                      <th>firstName</th>
+                      <th>lastName</th>
+                      <th>userName</th>
+                      <th>currentTeam</th>
+                      <th>previousTeam</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                    <td>1</td>
+                      <td>Martin</td>
+                      <td>Larsson</td>
+                      <td>Rekkles</td>
+                      <td>6</td>
+                      <td>2</td>
+                  </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Heo</td>
+                        <td>Su</td>
+                        <td>ShowMaker</td>
+                        <td>1</td>
+                        <td></td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                      <td>Kim</td>
+                      <td>Geon-bu</td>
+                      <td>Canyon</td>
+                      <td>1</td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                      <td>Cho</td>
+                      <td>Geon-hee</td>
+                      <td>BeryL</td>
+                      <td>1</td>
+                      <td></td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                      <td>Jang</td>
+                      <td>Yong-Jun</td>
+                      <td>Ghost</td>
+                      <td>1</td>
+                      <td></td>
+                  </tr>
+              </tbody>
+          </table>
+          <button class="btn btn-info" id="add"><span class="glyphicon glyphicon-plus-sign"></span>Add New Entry</button>
+      </div>    
+      
+      <br>
+  
+  <script src="bootstable.js"></script>
+  <script>
+  
 
-        <table style="width:100%">
-            <tbody><tr>
-              <th>playerID</th>
-              <th>username</th>
-              <th>firstName</th>
-              <th>lastName</th>
-              <th>CurrentTeam</th>
-              <th>previousTeam</th>
-            </tr>
-            <tr>
-                <th>01</th>
-                <th>Showmaker</th>
-                <th>Heo</th>
-                <th>Su</th>
-                <th>01</th>
-                <th></th>
-            </tr>
-            <tr>
-                <th>02</th>
-                <th>Rekkles</th>
-                <th>Martin</th>
-                <th>Larsson</th>
-                <th>03</th>
-                <th>02</th>
-            </tr>
-          </tbody></table>
-        <br>
-        <h1>Add/Update/Remove Entries</h1>
-        <form>
-        <label for="username">Enter Player username:</label>
-        <input type="text" id="username" name="username"><br><br>
-        <label for="firstName">Enter Player first name:</label>
-        <input type="text" id="firstName" name="firstName"><br><br>
-        <label for="lastName">Enter Player last name:</label>
-        <input type="text" id="lastName" name="lastName"><br><br>
-        <label for="currentTeam">Enter Player's current team:</label>
-        <input type="text" id="currentTeam" name="currentTeam"><br><br>
-        <label for="previousTeam">Enter Player's previous team:</label>
-        <input type="text" id="previousTeam" name="previousTeam" placeholder="Optional"><br><br>
-        <input type="submit" value="Insert">
-        <input type="submit" value="Update">
-        <input type="submit" value="Delete">
-        </form>
-        <br>
-        <h1>Enter Search Criteria</h1>
-        <form action="http://web.engr.oregonstate.edu/~zhangluy/tools/class-content/form_tests/check_request.php" method="post">
-        <label for="champ">Enter Player name:</label>
-        <input type="text" id="champ" name="champ"><br><br>
-        <label for="elo">Enter Previous Team ID (Get ID from Teams Section):</label>
-        <input type="text" id="elo" name="elo"><br><br>
-        <label for="lenmin">Year Current Team ID (Get Id from Teams section):</label>
-        <input type="text" id="lenmin" name="lenmin"><br><br>
-        <input type="submit" value="Submit">
-</form>
+  // dynamically modifies our table to provide update, add, delete capabiltiies 
+  $("#table-list").SetEditable();
+  $('#add').click(function() {
+      rowAddNew('table-list', [1,2,3]);
+  });
+
+  // allows user to search for a particular player and displays only those results
+  function playerSearch() {
+
+  // Declare variables
+
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("table-list");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[3];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+  
+  </script>
+    </section>
 
     </section>
 
